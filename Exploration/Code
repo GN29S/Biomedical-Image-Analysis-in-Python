@@ -1,1 +1,34 @@
+# Import ImageIO and PyPlot 
+import imageio
+import matplotlib.pyplot as plt
 
+# Load "chest-220.dcm"
+im = imageio.imread("chest-220.dcm")
+
+# Print image attributes, determine the type (here array) and shape (number of pixels)
+print('Image type:', type(im))
+print('Shape of image array:', im.shape)
+
+"""
+ImageIO reads in data as Image objects. These are standard NumPy arrays with a dictionary of metadata.
+Metadata can be quite rich in medical images and can include: 
+Patient demographics (name, age, sex, clinical information) and 
+Acquisition information (image shape, sampling rates, data type, modality such as X-Ray, CT or MRI).
+"""
+# Print the available metadata fields
+print(im.meta.keys())
+
+# Print the available metadata fields with the information in them
+print(im.meta)
+
+"""
+cmap controls the color mappings for each value. The "gray" colormap is common, but many others are available.
+vmin and vmax control the color contrast between values. Changing these can reduce the influence of extreme values.
+plt.axis('off') removes axis and tick labels from the image.
+"""
+
+# Read in "chest-220.dcm"
+im = imageio.imread("chest-220.dcm")
+plt.imshow(im, cmap='gray', vmin=-200, vmax=200)
+plt.axis('off')
+plt.show()
